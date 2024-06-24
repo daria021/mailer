@@ -1,0 +1,55 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:15
+    container_name: db_newsletter
+    env_file: .env
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+  redis:
+    image: redis:7
+    container_name: redis_app
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    container_name: mailer_app
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "9999:8000"
+    depends_on:
+      - db
+      - celery
+    restart: unless-stopped
+
+  celery:
+    build:
+      context: .
+    env_file: .env
+    container_name: celery_app
+    command: celery -A celery_tasks.setup_celery worker --loglevel=info
+    depends_on:
+      - redis
+
+#  flower:
+#    build:
+#      context: .
+#    env_file: .env-non-dev
+#    container_name: flower_app
+#    command: [ "/fastapi_app/docker/celery.sh", "flower" ]
+#    depends_on:
+#      - redis
+#      - celery
+#    ports:
+#      - 8888:5555
+
+volumes:
+  postgres_data:
