@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    User Service
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/user.css">
+{% endblock %}
+
+{% block content %}
+    <!-- Создание пользователя -->
+    <div>
+        <h2>сделать идиотского юзера</h2>
+        <form method="post" action="/user" id="create-user-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+
+            <button type="submit">кто нажмет тот гей</button>
+        </form>
+        <p id="create-user-response"></p>
+    </div>
+
+    <!-- Добавление тега пользователю -->
+    <div>
+        <h2>добавтть тег идиотскому юзеру</h2>
+        <form id="add-tag-form">
+            <label for="user_id">User ID:</label>
+            <input type="number" id="user_id" name="user_id" required>
+            <br>
+
+            <label for="tag">Tag:</label>
+            <input type="text" id="tag" name="tag" required>
+            <br>
+
+            <button type="submit">нажимай и твой комп взорвется</button>
+        </form>
+        <p id="add-tag-response"></p>
+    </div>
+
+    <script>
+        // Обработчик формы создания пользователя
+        document.getElementById('create-user-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const hash_password = document.getElementById('password').value;
+
+            const responseElement = document.getElementById('create-user-response');
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/user', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, hash_password }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    responseElement.textContent = 'User created successfully!';
+                } else {
+                    throw new Error('Failed to create user');
+                }
+            } catch (error) {
+                responseElement.textContent = error.message;
+            }
+        });
+
+        // Обработчик формы добавления тега
+        document.getElementById('add-tag-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const user = document.getElementById('user_id').value;
+            const tag = document.getElementById('tag').value;
+
+            const responseElement = document.getElementById('add-tag-response');
+
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/user/tag`, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ user, tag })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    responseElement.textContent = 'Tag added successfully!';
+                } else {
+                    throw new Error('Failed to add tag');
+                }
+            } catch (error) {
+                responseElement.textContent = error.message;
+            }
+        });
+    </script>
+
+{% endblock %}
+

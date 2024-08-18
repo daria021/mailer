@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    User Service
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/newsletter_all.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="cards-container">
+    {% for user in users %}
+        <div class="item-card">
+            <p><strong>User email:</strong> {{ user.email }}</p>
+            <p><strong>User tags:</strong> {{ user.tags }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

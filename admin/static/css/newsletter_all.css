@@ -1,0 +1,117 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    background: linear-gradient(
+        rgba(255, 105, 180, 1), /* Насыщенный розовый, соответствующий тону изображения */
+        rgba(255, 182, 193, 1)  /* Нежный розовый */
+    ),
+    url('/static/images/китти.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    padding: 20px;
+    margin: 0;
+    height: 100vh;
+    color: #FFB6C1FF; /* Белый цвет текста */
+}
+
+html{
+    background-image: linear-gradient(to bottom, #FF69B4FF, #FFB6C1FF);
+    background-size: auto, cover;
+    background-position: top left, center;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 200%;
+    color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*body::before {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 200%;*/
+/*    z-index: -1;*/
+/*}*/
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.item-card {
+    background-color: rgba(255, 255, 255, 0.9); /* Белый цвет с легкой прозрачностью */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    color: #333; /* Темный текст для контраста */
+    max-width: 300px;
+    width: 100%;
+    text-decoration: none;
+}
+
+.item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.newsletter-detail {
+    background-color: rgba(0, 0, 0, 0.8); /* Темный фон блока с легкой прозрачностью */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 800px;
+    margin: 50px auto; /* Центрирование блока по горизонтали */
+    color: #fff;
+}
+
+.newsletter-detail p {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+.tag {
+    background-color: #ffb6c1; /* Яркий розовый для тегов */
+    padding: 3px 8px;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.action-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-button, .back-button {
+    background-color: #FF009E;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.delete-button:hover, .back-button:hover {
+    background-color: #E60088;
+}
+
+.back-button {
+    background-color: #0096FF; /* Синий цвет для кнопки возврата */
+}
+
+.back-button:hover {
+    background-color: #007ACC;
+}

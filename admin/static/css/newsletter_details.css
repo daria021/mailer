@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    position: relative;
+    background-image: url('/static/images/китти.jpeg');
+    background-size: cover; /* Изображение покрывает весь экран */
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    margin: 0;
+    height: 100vh;
+    color: #fff; /* Белый цвет текста */
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный слой для контраста */
+    z-index: -1; /* Разместить слой под основным контентом */
+}
+
+.newsletter-detail {
+    background-color: rgba(0, 0, 0, 0.8); /* Сделаем фон блока более темным */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 800px;
+    margin: 50px auto; /* Центрируем блок по горизонтали */
+    color: #fff; /* Белый цвет текста */
+}
+
+.newsletter-detail p {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+.tag {
+    background-color: #FF009E;
+    padding: 3px 8px;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.action-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-button, .back-button {
+    background-color: #FF009E;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.delete-button:hover, .back-button:hover {
+    background-color: #E60088;
+}
+
+.back-button {
+    background-color: #0096FF; /* Цвет кнопки для возврата */
+}
+
+.back-button:hover {
+    background-color: #007ACC;
+}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Newsletter Service
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/newsletter_all.css">
+{% endblock %}
+
+{% block content %}
+    <div class="cards-container">
+        {% for newsletter in newsletters %}
+            <a href="/newsletter/{{ newsletter.id }}">
+                <div class="item-card">
+                    <p><strong>Newsletter ID:</strong> {{ newsletter.id }}</p>
+                    <p><strong>Newsletter User:</strong> {{ newsletter.user }}</p>
+                    <p><strong>Newsletter Subject:</strong> {{ newsletter.subject }}</p>
+                    <p><strong>Newsletter Text:</strong> {{ newsletter.text }}</p>
+                    <p><strong>Newsletter Tags:</strong> {{ newsletter.tags }}</p>
+                    <p><strong>Newsletter Target Time:</strong> {{ newsletter.target_time }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

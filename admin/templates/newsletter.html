@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Newsletter Service
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/newsletter.css">
+{% endblock %}
+
+{% block content %}
+    <div class="content-container">
+        <h2>написать письмо🤡</h2>
+        <form method="post" action="/newsletter" id="create-form">
+
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required>
+            <br>
+
+            <label for="text">Text:</label>
+            <textarea id="text" name="text" required></textarea>
+            <br>
+
+            <label for="target_time">Target Time (optional):</label>
+            <input type="datetime-local" id="target_time" name="target_time">
+            <br>
+
+            <button type="submit">отправить лол</button>
+        </form>
+
+        <div id="create-response"></div>
+    </div>
+
+
+
+    <script>
+        document.getElementById('create-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const subject = document.getElementById('subject').value;
+            const text = document.getElementById('text').value;
+            const target_time = document.getElementById('target_time').value || null;
+
+            const responseElement = document.getElementById('create-response');
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/newsletter', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ subject, text, target_time })
+                });
+
+                if (response.ok) {
+                    responseElement.textContent = 'Newsletter created successfully!';
+                } else {
+                    throw new Error('Failed to create newsletter');
+                }
+            } catch (error) {
+                responseElement.textContent = error.message;
+            }
+        });
+    {#    document.getElementById('all-newsletters-btn').addEventListener('click', function() {#}
+    {#window.location.href = '/newsletter/user'; // URL страницы со всеми рассылками#}
+    </script>
+
+
+{% endblock %}

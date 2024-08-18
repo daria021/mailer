@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %} {% endblock %}</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <link href="/static/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    {% block head %} {% endblock %}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        .menu {
+            background-color: #333;
+            margin-bottom: 20px;
+        }
+
+        .menu a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .menu a:hover {
+            background-color: #FF009E;
+            color: white;
+        }
+    </style>
+
+    <script>
+        function toggleNav() {
+            var x = document.getElementById("menu");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
+</head>
+<body>
+<!-- Меню с тремя кнопками -->
+<div id="menu" class="menu topnav">
+    <a href="/newsletter">Создать письмо</a>
+    <a href="/newsletter/user">Мои рассылки</a>
+    <a href="/tag">Добавить тег</a>
+</div>
+<div id="content" class="content">
+    {% block content %} {% endblock %}
+</div>
+</body>
+</html>

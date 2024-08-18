@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    position: relative;
+    background-image: url('/static/images/китти.jpeg');
+    background-size: cover; /* Изображение покрывает весь экран */
+    background-position: center; /* Центрирование изображения */
+    background-repeat: no-repeat; /* Изображение не повторяется */
+    padding: 20px;
+    margin: 0;
+    height: 100vh;
+    color: #fff; /* Белый цвет текста для лучшей читаемости */
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный слой поверх изображения для увеличения контраста */
+    z-index: -1; /* Разместить слой под основным контентом */
+}
+
+form {
+    background-color: rgba(0, 0, 0, 0.8); /* Сделаем фон формы более темным для лучшего контраста */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    position: relative;
+    z-index: 1; /* Разместить форму над слоем с прозрачностью */
+}
+
+input[type="email"], input[type="password"], input[type="text"], input[type="number"], input[type="datetime-local"], textarea, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9); /* Сделаем фон полей чуть менее прозрачным */
+    color: #000; /* Черный цвет текста для полей ввода */
+}
+
+button {
+    background-color: #FF009E;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #FF009E;
+}
+
+h2 {
+    margin-top: 0;
+    color: #fff; /* Белый цвет заголовков для контраста */
+}
+
+p {
+    color: #ff8080;
+    font-weight: bold;
+}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Authentication
+{% endblock %}
+
+{% block head %}
+<link href="/static/css/auth.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h1>Welcome to gay club</h1>
+    <div class="form-group">
+        <label for="email">Введи почту</label>
+        <input type="text" id="email" name="email" required placeholder="Введи почту">
+        <p class="error-message"></p>
+        <label for="hash_password">Веди пароль</label>
+        <input type="password" id="password" name="password" required placeholder="Введи паролб">
+        <p class="error-message"></p>
+    </div>
+    <button type="button" onclick="validateAndRedirect()">Submit</button>
+    <script>
+        document.getElementById('password').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                validateAndRedirect();
+            }
+        });
+
+        function validateAndRedirect() {
+            const url = 'http://127.0.0.1:8000/auth'
+
+            const email = document.getElementById('email').value;
+            const hash_password = document.getElementById('password').value;
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({email, hash_password})
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'ok') {
+                        window.location = '{{ destination }}';
+                    } else {
+                        document.querySelector('.error-message').textContent = data.message;
+                    }
+                });
+        }
+    </script>
+</div>
+{% endblock %}

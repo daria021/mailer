@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Tag Service
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/newsletter_all.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="cards-container">
+    {% for tag in tags %}
+        <div class="item-card">
+            <p><strong>Tag ID:</strong> {{ tag.id }}</p>
+            <p><strong>Tag text:</strong> {{ tag.text }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

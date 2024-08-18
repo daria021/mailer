@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Newsletter Detail
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/newsletter.css">
+{% endblock %}
+
+{% block content %}
+    <div class="newsletter-detail">
+        <h2>Newsletter Details</h2>
+        <p><strong>ID:</strong> {{ newsletter.id }}</p>
+        <p><strong>User ID:</strong> {{ newsletter.user }}</p>
+        <p><strong>Subject:</strong> {{ newsletter.subject }}</p>
+        <p><strong>Text:</strong> {{ newsletter.text }}</p>
+        <p><strong>Tags:</strong>
+            {% if newsletter.tags %}
+                {% for tag in newsletter.tags %}
+                    <span class="tag">{{ tag.name }}</span>{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            {% else %}
+                No tags
+            {% endif %}
+        </p>
+        <p><strong>Target Time:</strong> 
+            {% if newsletter.target_time %}
+                {{ newsletter.target_time }}
+            {% else %}
+                Not set
+            {% endif %}
+        </p>
+        
+        <!-- Buttons for actions -->
+        <div class="action-buttons">
+            <button type="submit" id="delete-button" class="delete-button">Delete Newsletter</button>
+            <a href="/newsletter" class="back-button">Back to All Newsletters</a>
+        </div>
+    </div>
+<script>
+    // Обработчик кнопки удаления письма
+    document.querySelector('#delete-button').addEventListener('click', async function() {
+        const newsletterId = {{ newsletter.id }};
+
+        let c = confirm('Are you sure you want to delete this newsletter?');
+        if (c) {
+
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/newsletter/${newsletterId}`, {
+                    method: "DELETE",
+                });
+
+                if (response.ok) {
+                    window.location = '/newsletter/all';
+                } else {
+                    console.error('Failed to delete newsletter');
+                }
+            } catch (error) {
+                console.error(error);
+            }}
+    });
+
+</script>
+
+{% endblock %}
